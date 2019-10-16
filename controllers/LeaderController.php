@@ -105,7 +105,11 @@ class LeaderController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        /*$group = \app\models\Group::find()->where(['leader_id'=>$id])->one();
+        $group->leader_id = NULL;
+        $group->update();*/
+        $model->delete();
 
         return $this->redirect(['index']);
     }

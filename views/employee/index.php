@@ -28,6 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'reg_number',
+            [
+                'attribute'=>'person',
+                'value'=>'person.name',
+            ],
             'number_bpjstk',
             'number_bpjskes',
             'date_of_hired',
@@ -35,7 +39,22 @@ $this->params['breadcrumbs'][] = $this->title;
             //'email:email',
             //'person_id',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{view} {update} {delete} {unreg}',
+                'buttons'=>[
+                    'unreg'=>function($url, $model){
+                        if (isset($model->person_id)){
+                            $url= yii\helpers\Url::to(['unregemp', 'id'=>$model->id]);
+                        }else {
+                            $url='#';
+                        }
+                        //$url= yii\helpers\Url::to(['unregemp', 'id'=>$model->id]);
+                        return Html::a('unregemp', $url);
+                    }
+                ]
+                
+            ],
         ],
     ]); ?>
 

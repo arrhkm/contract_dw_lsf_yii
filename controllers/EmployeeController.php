@@ -65,9 +65,14 @@ class EmployeeController extends Controller
     public function actionCreate()
     {
         $model = new Employee();
+        $model->date_of_hired = date('Y-m-d');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())){
+            $model->reg_number= strtoupper($model->reg_number);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            
         }
 
         return $this->render('create', [
@@ -93,6 +98,18 @@ class EmployeeController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+    
+    public function actionUnregemp($id){
+        $model = $this->findModel($id);
+        //lepaskan id_person dari employee;
+        $model->person_id ='';
+        if ($model->update()){
+            $this->redirect(['view', 'id'=>$model->id]);
+        }
+        
+        //set status contarct = close 
+        
     }
 
     /**

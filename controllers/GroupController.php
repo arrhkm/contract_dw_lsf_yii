@@ -152,6 +152,13 @@ class GroupController extends Controller
     public function actionAddleader(){
         
     }
+    
+    public function actionUnregleader($id){
+        $model = $this->findModel($id);
+        $model->leader_id = NULL;
+        $model->update();
+        return $this->redirect(['index']);
+    }
 
     /**
      * Updates an existing Group model.
@@ -186,8 +193,10 @@ class GroupController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $model_grouemployee = \app\models\Groupemployee::deleteAll(['group_id'=>$id]);
+        $model_regemail = \app\models\Registeremailgroup::deleteAll(['group_id'=>$id]);
+        $model->delete();
         return $this->redirect(['index']);
     }
 

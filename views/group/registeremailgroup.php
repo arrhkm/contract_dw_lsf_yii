@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'email_group_id')->widget(Select2::class,[
+    <?= $form->field($model, 'email_group_id')->label('Email Group List')->widget(Select2::class,[
         'data'=> ArrayHelper::map(app\models\Emailgroup::find()->all(),'id','name'),
     ]) ?>
 

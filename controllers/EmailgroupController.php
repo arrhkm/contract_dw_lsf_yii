@@ -104,7 +104,16 @@ class EmailgroupController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        
+        $register_emailgroup = \app\models\Registeremailgroup::find()->where(['email_group_id'=>$id])->one();
+        
+        $register_emailgroup->delete();
+        $model->delete();
+       
+        
+        
+        $model->delete();
 
         return $this->redirect(['index']);
     }

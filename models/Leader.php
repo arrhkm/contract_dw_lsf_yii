@@ -31,7 +31,7 @@ class Leader extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email'], 'required'],
+            [['name'], 'required'],
             [['name', 'jabatan'], 'string', 'max' => 50],
             [['email'], 'string', 'max' => 254],
         ];
@@ -44,7 +44,7 @@ class Leader extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Leader Name',
             'email' => 'Email',
             'jabatan' => 'Jabatan',
         ];

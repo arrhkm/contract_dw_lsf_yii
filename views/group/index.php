@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\GroupSearch */
@@ -26,10 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'name',
-            'leader.name',
-            'leader_id',
+            [
+                'attribute'=>'leader',
+                'value'=>'leader.name',
+            ],
+            //'leader_id',
 
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -39,6 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         $url= yii\helpers\Url::to(['addleader', 'id'=>$model->id]);
                         return Html::a('add leader', $url);
                     },
+                    'unregleader'=>function($url, $model){
+                        $url = Url::to(['unregleader', 'id'=>$model->id]);
+                        return Html::a('unreg leader', $url);
+                    }
                 ]
             ],
                 

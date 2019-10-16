@@ -30,6 +30,7 @@ class Emailgroup extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'email'], 'required'],
+            [['email'], 'unique'],
             [['name'], 'string', 'max' => 50],
             [['email'], 'string', 'max' => 254],
         ];

@@ -14,11 +14,12 @@ class GroupSearch extends Group
     /**
      * {@inheritdoc}
      */
+    public $leader;
     public function rules()
     {
         return [
             [['id', 'leader_id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'leader'], 'safe'],
         ];
     }
 
@@ -41,6 +42,7 @@ class GroupSearch extends Group
     public function search($params)
     {
         $query = Group::find();
+        $query->joinWith('leader');
 
         // add conditions that should always apply here
 
@@ -63,6 +65,7 @@ class GroupSearch extends Group
         ]);
 
         $query->andFilterWhere(['ilike', 'name', $this->name]);
+        $query->andFilterWhere(['ilike', 'employee_leader.name', $this->leader]);
 
         return $dataProvider;
     }

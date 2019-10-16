@@ -16,6 +16,7 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'svPG_fT8CBY7myWDrpAmiXd0ZwCtgr2n',
         ],
+        'hkmLib'=>'app\components',
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

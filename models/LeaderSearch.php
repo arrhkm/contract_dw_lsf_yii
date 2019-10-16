@@ -14,6 +14,7 @@ class LeaderSearch extends Leader
     /**
      * {@inheritdoc}
      */
+    
     public function rules()
     {
         return [
@@ -41,6 +42,7 @@ class LeaderSearch extends Leader
     public function search($params)
     {
         $query = Leader::find();
+        //$query->with('group');
 
         // add conditions that should always apply here
 

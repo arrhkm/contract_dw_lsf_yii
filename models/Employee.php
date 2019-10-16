@@ -37,6 +37,7 @@ class Employee extends \yii\db\ActiveRecord
     {
         return [
             [['reg_number', 'date_of_hired', 'is_permanent'], 'required'],
+            [['id', 'person_id'], 'unique'],
             [['date_of_hired'], 'safe'],
             [['is_permanent'], 'boolean'],
             [['person_id'], 'default', 'value' => null],
