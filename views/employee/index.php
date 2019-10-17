@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Employee', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Search Employee', ['search'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,11 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'reg_number',
             [
                 'attribute'=>'person',
                 'value'=>'person.name',
+            ],
+            [
+                'attribute'=>'group',
+                'value'=>'groupemployee.group.name',
             ],
             'number_bpjstk',
             'number_bpjskes',

@@ -15,11 +15,15 @@ class EmployeeSearch extends Employee
      * {@inheritdoc}
      */
     public $person;
+    public $group;
     public function rules()
     {
         return [
             [['id', 'person_id'], 'integer'],
-            [['reg_number', 'number_bpjstk', 'number_bpjskes', 'date_of_hired', 'email', 'person'], 'safe'],
+            [
+                ['reg_number', 'number_bpjstk', 'number_bpjskes', 'date_of_hired', 'email', 'person', 'group'],
+                'safe'
+            ],
             [['is_permanent'], 'boolean'],
         ];
     }
@@ -44,6 +48,8 @@ class EmployeeSearch extends Employee
     {
         $query = Employee::find();
         $query->joinWith('person');
+        $query->joinWith('groupemployee');
+        $query->join('left join', 'employee_group', 'employee_group.id=employee_groupemployee.group_id');
         
 
         // add conditions that should always apply here
@@ -72,6 +78,7 @@ class EmployeeSearch extends Employee
             ->andFilterWhere(['ilike', 'number_bpjstk', $this->number_bpjstk])
             ->andFilterWhere(['ilike', 'number_bpjskes', $this->number_bpjskes])
             ->andFilterWhere(['ilike', 'employee_person.name', $this->person])
+            ->andFilterWhere(['ilike', 'employee_group.name', $this->group])
             ->andFilterWhere(['ilike', 'email', $this->email]);
 
         return $dataProvider;

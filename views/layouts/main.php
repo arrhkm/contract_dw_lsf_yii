@@ -52,8 +52,8 @@ AppAsset::register($this);
                ['label' => 'Contract Type', 'url' => ['/contracttype']],
                ['label' => 'Jabatan', 'url' => ['/jabatan']],
                ['label' => 'Project', 'url' => ['/project']],
-               ['label' => 'Contract All', 'url' => ['/contract']],
-               ['label' => 'Contract Cek', 'url' => ['/contract/contractcek']],
+               ['label' => 'Contract Employee', 'url' => ['/contract']],
+               //['label' => 'Contract Cek', 'url' => ['/contract/contractcek']],
                ['label' => 'SP', 'url' => ['/sp']],
                
             ]],

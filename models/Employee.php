@@ -88,6 +88,6 @@ class Employee extends \yii\db\ActiveRecord
      */
     public function getGroupemployee()
     {
-        return $this->hasOne(EmployeeGroupemployee::className(), ['employee_id' => 'id']);
+        return $this->hasOne(Groupemployee::className(), ['employee_id' => 'id']);
     }
 }

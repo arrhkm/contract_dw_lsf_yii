@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
 use app\models\Employee;
 use app\commands\DateRange;
 use yii\data\ArrayDataProvider;
+use DateInterval;
 
 
 /**
@@ -142,19 +143,19 @@ class ContractController extends Controller
                     ->limit(1)->all();
                 $date_contract = $contracts[0]['end_date'];
                 $jedah = DateRange::getRangeValueFromNow($date_contract);
-                if ($jedah >=-30 && $jedah<30)
+                if ($jedah >=-30 && $jedah<30){
                     if (isset ($contracts[0]['start_date'])){
                         array_push($dt_contract, [
-                        'employee_id'=>$emp->id,
-                        'name'=>$emp->person->name, 
-                        'id'=>$contracts[0]['id'],
-                        'number_contract'=>$contracts[0]['number_contract'],
-                        'start_date'=>$contracts[0]['start_date'],
-                        'end_date'=>$contracts[0]['end_date'],
-                        'jedah'=>$jedah,
-                ]);
+                            'employee_id'=>$emp->id,
+                            'name'=>$emp->person->name, 
+                            'id'=>$contracts[0]['id'],
+                            'number_contract'=>$contracts[0]['number_contract'],
+                            'start_date'=>$contracts[0]['start_date'],
+                            'end_date'=>$contracts[0]['end_date'],
+                            'jedah'=>$jedah,
+                        ]);
                     }
-                
+                }
             }                    
             
         }
@@ -171,6 +172,38 @@ class ContractController extends Controller
             'provider'=>$provider,
             
         ]);
+    }
+    
+    public function actionExpiredcontract($interval_day=30){
+        $today = date_create(date('Y-m-d'));
+        $today_str = date_format($today,"Y-m-d");
+        //$interval = new DateInterval("P".$days_interval."D");
+        $interval = new DateInterval('P30D');
+        
+        
+        $end_date = $today->add($interval);
+        $end_date_str = date_format($end_date,'Y-m-d');
+        //------------------------------------------
+                       
+        
+       
+        $model = Contract::find()->joinWith('employee')
+        ->where(['contract_contract.status' => 'notified'])
+        ->orWhere(
+           ['between',
+               'contract_contract.end_date',
+               $today_str,
+               $end_date_str,
+           ]);
+        return $this->render('expiredcontract',[
+            'today'=>$today,
+            'interval'=>$interval,
+            'end_date'=>$end_date,
+            'today_str'=>$today_str,
+            'end_date_str'=>$end_date_str,
+            'model'=>$model,
+        ]);
+        
     }
     //end
 

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ContractSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -16,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Contract', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Expired Contract', ['expiredcontract'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>

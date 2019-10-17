@@ -79,6 +79,15 @@ class EmployeeController extends Controller
             'model' => $model,
         ]);
     }
+    
+    public function actionSearch()
+    {
+        $searchModel = new EmployeeSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('_search', [
+            'model'=>$searchModel,
+        ]);
+    }
 
     /**
      * Updates an existing Employee model.
