@@ -38,6 +38,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'gender',
             //'tax_account',
             //'city',
+            'district', 
+            'no_bpjs_kesehatan',
+            'no_bpjs_tenaga_kerja',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

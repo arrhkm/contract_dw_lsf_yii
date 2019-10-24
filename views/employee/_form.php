@@ -25,9 +25,7 @@ use app\commands\ListPerson;
         ]
     ]) ?>
 
-    <?= $form->field($model, 'number_bpjstk')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'number_bpjskes')->textInput(['maxlength' => true]) ?>
+   
 
     <?= $form->field($model, 'date_of_hired')->widget(DatePicker::className(),[
         'dateFormat'=>'php:Y-m-d',

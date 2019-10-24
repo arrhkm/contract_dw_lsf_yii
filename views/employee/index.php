@@ -37,9 +37,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'group',
                 'value'=>'groupemployee.group.name',
             ],
-            'number_bpjstk',
-            'number_bpjskes',
+            
             'date_of_hired',
+            [
+                'attribute'=>'bpjs_kes',
+                'value'=>'person.no_bpjs_kesehatan',
+            ],
+            [
+                'attribute'=>'bpjs_tk',
+                'value'=>'person.no_bpjs_tenaga_kerja',
+            ],
             //'is_permanent:boolean',
             //'email:email',
             //'person_id',

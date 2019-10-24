@@ -48,6 +48,10 @@ use yii\jui\DatePicker;
 
     <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'district')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'no_bpjs_kesehatan')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

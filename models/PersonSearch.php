@@ -18,7 +18,7 @@ class PersonSearch extends Person
     {
         return [
             [['id'], 'integer'],
-            [['idcard', 'name', 'birth_of_date', 'birth_city', 'phone', 'address', 'bank_account', 'gender', 'tax_account', 'city'], 'safe'],
+            [['idcard', 'name', 'birth_of_date', 'birth_city', 'phone', 'address', 'bank_account', 'gender', 'tax_account', 'city', 'district', 'no_bpjs_kesehatan', 'no_bpjs_tenaga_kerja'], 'safe'],
             [['marital'], 'boolean'],
         ];
     }
@@ -72,7 +72,10 @@ class PersonSearch extends Person
             ->andFilterWhere(['ilike', 'bank_account', $this->bank_account])
             ->andFilterWhere(['ilike', 'gender', $this->gender])
             ->andFilterWhere(['ilike', 'tax_account', $this->tax_account])
-            ->andFilterWhere(['ilike', 'city', $this->city]);
+            ->andFilterWhere(['ilike', 'city', $this->city])
+            ->andFilterWhere(['ilike', 'district', $this->district])
+            ->andFilterWhere(['ilike', 'no_bpks_kesehatan', $this->no_bpjs_kesehatan])
+            ->andFilterWhere(['ilike', 'no_bpjs_tenaga_kerja', $this->no_bpjs_tenaga_kerja]);
 
         return $dataProvider;
     }

@@ -48,8 +48,9 @@ class Person extends \yii\db\ActiveRecord
             [['birth_of_date'], 'safe'],
             [['marital'], 'boolean'],
             [['idcard'], 'string', 'max' => 35],
-            [['name', 'birth_city', 'address', 'city'], 'string', 'max' => 100],
+            [['name', 'birth_city', 'address', 'city', 'district'], 'string', 'max' => 100],
             [['phone', 'bank_account', 'tax_account'], 'string', 'max' => 20],
+            [['no_bpjs_kesehatan', 'no_bpjs_tenaga_kerja'], 'string', 'max' => 50],
             [['gender'], 'string', 'max' => 1],
             [['idcard'], 'unique'],
         ];
@@ -73,6 +74,9 @@ class Person extends \yii\db\ActiveRecord
             'gender' => 'Gender',
             'tax_account' => 'Tax Account',
             'city' => 'City',
+            'district'=> 'Kecamatan',
+            'no_bpjs_kesehatan' => 'No. BPJS Kesehatan',
+            'no_bpjs_tenaga_kerja'=>'No. BPJS Tenaga Keraja',
         ];
     }
 

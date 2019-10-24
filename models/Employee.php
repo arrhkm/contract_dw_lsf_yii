@@ -43,7 +43,7 @@ class Employee extends \yii\db\ActiveRecord
             [['person_id'], 'default', 'value' => null],
             [['person_id'], 'integer'],
             [['reg_number'], 'string', 'max' => 15],
-            [['number_bpjstk', 'number_bpjskes'], 'string', 'max' => 20],
+           
             [['email'], 'string', 'max' => 100],
             [['reg_number'], 'unique'],
             [['person_id'], 'exist', 'skipOnError' => true, 'targetClass' => Person::className(), 'targetAttribute' => ['person_id' => 'id']],
@@ -58,8 +58,7 @@ class Employee extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'reg_number' => 'Reg Number',
-            'number_bpjstk' => 'Number Bpjstk',
-            'number_bpjskes' => 'Number Bpjskes',
+            
             'date_of_hired' => 'Date Of Hired',
             'is_permanent' => 'Is Permanent',
             'email' => 'Email',

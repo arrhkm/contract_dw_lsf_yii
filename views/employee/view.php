@@ -31,8 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'reg_number',
-            'number_bpjstk',
-            'number_bpjskes',
+           
             'date_of_hired',
             'is_permanent:boolean',
             'email:email',

@@ -16,12 +16,15 @@ class EmployeeSearch extends Employee
      */
     public $person;
     public $group;
+    public $bpjs_kes;
+    public $bpjs_tk;
+
     public function rules()
     {
         return [
             [['id', 'person_id'], 'integer'],
             [
-                ['reg_number', 'number_bpjstk', 'number_bpjskes', 'date_of_hired', 'email', 'person', 'group'],
+                ['reg_number', 'date_of_hired', 'bpjs_kes', 'bpjs_tk', 'email', 'person', 'group'],
                 'safe'
             ],
             [['is_permanent'], 'boolean'],
@@ -74,10 +77,10 @@ class EmployeeSearch extends Employee
             'person_id' => $this->person_id,
         ]);
 
-        $query->andFilterWhere(['ilike', 'reg_number', $this->reg_number])
-            ->andFilterWhere(['ilike', 'number_bpjstk', $this->number_bpjstk])
-            ->andFilterWhere(['ilike', 'number_bpjskes', $this->number_bpjskes])
+        $query->andFilterWhere(['ilike', 'reg_number', $this->reg_number])           
             ->andFilterWhere(['ilike', 'employee_person.name', $this->person])
+            ->andFilterWhere(['ilike', 'employee_person.no_bpjs_kesehatan', $this->bpjs_kes])
+            ->andFilterWhere(['ilike', 'employee_person.no_bpjs_tenaga_kerja', $this->bpjs_tk])
             ->andFilterWhere(['ilike', 'employee_group.name', $this->group])
             ->andFilterWhere(['ilike', 'email', $this->email]);
 

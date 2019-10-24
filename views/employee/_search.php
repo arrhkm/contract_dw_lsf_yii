@@ -19,9 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'reg_number') ?>
 
-    <?= $form->field($model, 'number_bpjstk') ?>
-
-    <?= $form->field($model, 'number_bpjskes') ?>
+    
 
     <?= $form->field($model, 'date_of_hired') ?>
 
