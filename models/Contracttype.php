@@ -54,6 +54,6 @@ class Contracttype extends \yii\db\ActiveRecord
      */
     public function getContractContracts()
     {
-        return $this->hasMany(ContractContract::className(), ['contract_type_id' => 'id']);
+        return $this->hasMany(Contract::className(), ['contract_type_id' => 'id']);
     }
 }

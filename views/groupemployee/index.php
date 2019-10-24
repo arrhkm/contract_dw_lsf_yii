@@ -26,9 +26,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'employee_id',
-            'group_id',
+            //'id',
+            //'employee_id',            
+            //'group_id',
+            [
+                'attribute'=>'reg_number',
+                'value'=>'employee.reg_number',
+            ],
+            [
+                'attribute'=>'person',
+                'value'=>'employee.person.name',
+            ],
+            [
+                'attribute'=>'group',
+                'value'=>'group.name',
+            ],
+            [
+                'attribute'=>'src_leader',
+                'value'=>'group.leader.name',
+            ],
+            'group.name',
+            'group.leader.name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

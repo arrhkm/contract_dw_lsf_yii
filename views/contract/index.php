@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             [
                 'attribute'=>'employee', 
+                'value'=>'employee.reg_number',
+            ],
+            [
+                'attribute'=>'person', 
                 'value'=>'employee.person.name',
             ],
             'number_contract',
@@ -39,6 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'end_date',
             'contract_distance',
             'besar_upah',
+            'project.name',
+            'contractType.contract_name',
             //'corporate_name',
             //'corporate_address',
             //'jenis_usaha',
@@ -46,9 +52,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'cara_pembayaran',
             //'tempat_aggrement',
             //'pejabat_acc',
-            'contract_type_id',
-            'employee_id',
-            'project_id',
+            //'contract_type_id',
+            //'employee_id',
+            //'project_id',
             'status',
 
             ['class' => 'yii\grid\ActionColumn'],

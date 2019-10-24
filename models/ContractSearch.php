@@ -24,7 +24,7 @@ class ContractSearch extends Contract
                 [
                     'number_contract', 'doc_date', 'start_date', 'end_date', 'corporate_name', 
                     'corporate_address', 'jenis_usaha', 'cara_pembayaran', 'tempat_aggrement', 
-                    'pejabat_acc', 'status', 'employee',
+                    'pejabat_acc', 'status', 'employee', 'person',
                 ],
                 'safe'
             ],
@@ -52,9 +52,10 @@ class ContractSearch extends Contract
     public function search($params)
     {
         $query = Contract::find();
-        $query->join('LEFT JOIN', 'employee_employee', 'employee_employee.id = contract_contract.employee_id');
-        $query->join('LEFT JOIN', 'employee_person', 'employee_person.id = employee_employee.id');
+        $query->joinWith('employee')//('LEFT JOIN', 'employee_employee', 'employee_employee.id = contract_contract.employee_id');
+        ->join('RIGHT JOIN', 'employee_person', 'employee_person.id = employee_employee.person_id');
 
+        
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -89,9 +90,11 @@ class ContractSearch extends Contract
             ->andFilterWhere(['ilike', 'jenis_usaha', $this->jenis_usaha])
             ->andFilterWhere(['ilike', 'cara_pembayaran', $this->cara_pembayaran])
             ->andFilterWhere(['ilike', 'tempat_aggrement', $this->tempat_aggrement])
-            ->andFilterWhere(['ilike', 'pejabat_acc', $this->pejabat_acc])
-            ->andFilterWhere(['ilike', 'employee_person.name', $this->employee])
+            ->andFilterWhere(['ilike', 'pejabat_acc', $this->pejabat_acc])           
             ->andFilterWhere(['ilike', 'status', $this->status]);
+        $query->andFilterWhere(['ilike', 'employee_person.name', $this->person]);
+        $query->andFilterWhere(['ilike', 'employee_employee.reg_number', $this->employee]);
+        
 
         return $dataProvider;
     }
