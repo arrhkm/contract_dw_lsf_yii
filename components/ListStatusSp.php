@@ -16,7 +16,13 @@ namespace app\components;
 class ListStatusSp {
     //put your code here
     public static function getList(){
-        $list = ['LISAN', 'TERTULIS', 'SP1', 'SP2', 'SP3'];
+        $list = [
+            'LISAN'=>'LISAN', 
+            'TERTULIS'=>'TERTULIS', 
+            'SP1'=>'SP1', 
+            'SP2'=>'SP2', 
+            'SP3'=>'SP3'
+        ];
         return $list;
     }
 }

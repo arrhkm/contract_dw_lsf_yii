@@ -25,14 +25,26 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            //'id',
             'jenis_sp',
             'tgl_sp',
             'duration_sp',
-            'id_employee_employee',
+            [
+                'label'=>'expired sp', 
+                'value'=>function($model){
+                    $date_sp_expired = date_create(date($model->tgl_sp));
+                    $str_duration = "P".$model->duration_sp."M";
+                    date_add($date_sp_expired, New DateInterval($str_duration));
+                    return date_format($date_sp_expired,"Y-m-d");
+                }
+            ],
+            //'id_employee_employee',
             //'employee_name',
-            //'reg_number',
+            [
+                'attribute'=>'person',
+                'value'=>'employee.person.name',
+            ],
+              
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

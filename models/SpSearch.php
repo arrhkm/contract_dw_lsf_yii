@@ -11,14 +11,18 @@ use app\models\Sp;
  */
 class SpSearch extends Sp
 {
+    
     /**
      * {@inheritdoc}
      */
+
+    public $person;
+
     public function rules()
     {
         return [
             [['id', 'duration_sp', 'id_employee_employee'], 'integer'],
-            [['jenis_sp', 'tgl_sp', 'employee_name', 'reg_number'], 'safe'],
+            [['jenis_sp', 'tgl_sp', 'employee_name', 'reg_number', 'person'], 'safe'],
         ];
     }
 
@@ -41,6 +45,8 @@ class SpSearch extends Sp
     public function search($params)
     {
         $query = Sp::find();
+        $query->joinWith('employee')
+        ->join('LEFT JOIN', 'employee_person', 'employee_person.id=employee_employee.person_id');
 
         // add conditions that should always apply here
 
@@ -65,8 +71,10 @@ class SpSearch extends Sp
         ]);
 
         $query->andFilterWhere(['ilike', 'jenis_sp', $this->jenis_sp])
-            ->andFilterWhere(['ilike', 'employee_name', $this->employee_name])
-            ->andFilterWhere(['ilike', 'reg_number', $this->reg_number]);
+            //->andFilterWhere(['ilike', 'employee_name', $this->employee_name])
+            ->andFilterWhere(['ilike', 'reg_number', $this->reg_number])
+            ->andFilterWhere(['ilike', 'employee_person.name', $this->person]);
+        
 
         return $dataProvider;
     }

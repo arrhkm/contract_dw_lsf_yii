@@ -64,7 +64,7 @@ class Sp extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEmployeeEmployee()
+    public function getEmployee()
     {
         return $this->hasOne(Employee::className(), ['id' => 'id_employee_employee']);
     }
