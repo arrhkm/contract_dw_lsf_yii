@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+use yii\jui\DatePicker;
+
 /* @var $this yii\web\View */
 /* @var $model app\models\ContractSearch */
 /* @var $form yii\widgets\ActiveForm */
@@ -21,7 +23,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'doc_date') ?>
 
-    <?= $form->field($model, 'start_date') ?>
+    <?= $form->field($model, 'start_date')->widget(DatePicker::className(),[
+        'dateFormat'=>'php:Y-m-d',
+    ]) ?>
 
     <?= $form->field($model, 'end_date') ?>
 

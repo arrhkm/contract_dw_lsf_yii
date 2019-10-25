@@ -46,6 +46,7 @@ AppAsset::register($this);
                 ['label' => 'Email Group', 'url' => ['/emailgroup']],
                 ['label' => 'Leader Group', 'url' => ['/leader']],
                 ['label' => 'Group Employee', 'url' => ['/groupemployee']],
+                ['label' => 'Employee Blacklist', 'url' => ['/employeeblacklist']],
                 
             ]],
             ['label'=>'Contract', 'url'=>'#', 'items'=>[

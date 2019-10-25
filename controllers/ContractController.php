@@ -14,6 +14,7 @@ use app\models\Employee;
 use app\commands\DateRange;
 use yii\data\ArrayDataProvider;
 use DateInterval;
+use app\models\DateRangeForm;
 
 
 /**
@@ -42,12 +43,24 @@ class ContractController extends Controller
      */
     public function actionIndex()
     {
+
+        $model_form = New DateRangeForm();
         $searchModel = new ContractSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        if ($model_form->load(Yii::$app->request->post()) && $model_form->validate()){
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $model_form->date_time_start, $model_form->date_time_end);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                'model_form' => $model_form,
+            ]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model_form' => $model_form,
         ]);
     }
 

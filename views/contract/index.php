@@ -2,6 +2,12 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
+use kartik\daterange\DateRangePicker;
+use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
+
+
 
 
 /* @var $this yii\web\View */
@@ -22,11 +28,43 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+
+
+    <?php /*= DateRangePicker::widget([
+        //'name'=>'kvdate3',
+        'model'=>$searchModel,
+        'attribute' => 'createTimeRange',
+        //'useWithAddon'=>true,
+        'convertFormat'=>true,
+        //'startAttribute' => 'createTimeStart',
+        //'endAttribute' => 'createTimeEnd',
+        'pluginOptions'=>[
+            'locale'=>['format' => 'Y-m-d'],
+        ]
+    ]);*/?>
+
+
+    
+    <?php $form = ActiveForm::begin(
+        [
+            'action' => ['contract/index'],
+            'options' => ['method' => 'post']
+        ]
+    );?>
+    <?= $form->field($model_form,'date_time_start')->widget(DatePicker::class,[
+        'dateFormat'=>'php:Y-m-d',
+    ])?>
+    <?= $form->field($model_form, 'date_time_end')->widget(DatePicker::class,[
+        'dateFormat'=>'php:Y-m-d',
+    ])?>
+    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>   
+    <?php ActiveForm::end();?>
+    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
             [
@@ -40,6 +78,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'number_contract',
             'doc_date',
             'start_date',
+            
             'end_date',
             'contract_distance',
             'besar_upah',
@@ -56,10 +95,12 @@ $this->params['breadcrumbs'][] = $this->title;
             //'employee_id',
             //'project_id',
             'status',
+          
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
-    ]); ?>
+    ]);?>
 
 
 </div>
+

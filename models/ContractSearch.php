@@ -6,6 +6,8 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Contract;
 
+use kartik\daterange\DateRangeBehavior;
+
 /**
  * ContractSearch represents the model behind the search form of `app\models\Contract`.
  */
@@ -16,19 +18,42 @@ class ContractSearch extends Contract
      */
     public $employee;
     public $person;
+    
+
+    //variable time kartik range 
+    public $createTimeRange;
+    public $createTimeStart;
+    public $createTimeEnd;
+    //end Time Range 
+
+    /*public function behaviors()
+    {
+       return [
+            [
+                'class' => DateRangeBehavior::className(),
+                'attribute' => 'createTimeRange',
+                'dateStartAttribute' => 'createTimeStart',
+                'dateEndAttribute' => 'createTimeEnd',
+            ]
+        ];
+    }*/
+
     public function rules()
     {
         return [
+            //[['createTimeRange'], 'match', 'pattern' => '/^.+\s\-\s.+$/'],
+            [['createTimeStart', 'createTimeEnd'], 'date'],
             [['id', 'contract_distance', 'jabatan_id', 'contract_type_id', 'employee_id', 'project_id'], 'integer'],
             [
                 [
                     'number_contract', 'doc_date', 'start_date', 'end_date', 'corporate_name', 
                     'corporate_address', 'jenis_usaha', 'cara_pembayaran', 'tempat_aggrement', 
-                    'pejabat_acc', 'status', 'employee', 'person',
+                    'pejabat_acc', 'status', 'employee', 'person', 'createTimeStart', 'createTimeEnd',
                 ],
                 'safe'
             ],
             [['besar_upah'], 'number'],
+            
             
         ];
     }
@@ -49,7 +74,7 @@ class ContractSearch extends Contract
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $date_start= NULL, $date_end=NULL)
     {
         $query = Contract::find();
         $query->joinWith('employee')//('LEFT JOIN', 'employee_employee', 'employee_employee.id = contract_contract.employee_id');
@@ -66,16 +91,18 @@ class ContractSearch extends Contract
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+            //$query->where('0=1');
             return $dataProvider;
         }
+
+        
 
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
             'doc_date' => $this->doc_date,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
+            //'start_date' => $this->start_date,
+            //'end_date' => $this->end_date,
             'contract_distance' => $this->contract_distance,
             'besar_upah' => $this->besar_upah,
             'jabatan_id' => $this->jabatan_id,
@@ -94,7 +121,13 @@ class ContractSearch extends Contract
             ->andFilterWhere(['ilike', 'status', $this->status]);
         $query->andFilterWhere(['ilike', 'employee_person.name', $this->person]);
         $query->andFilterWhere(['ilike', 'employee_employee.reg_number', $this->employee]);
-        
+        if (isset($date_start) && isset($date_end)){
+            //$this->createTimeStart = '2019-03-19';
+            //$this->createTimeEnd = '2019-03-19';
+            //$query->andFilterWhere(['>=', 'end_date', $this->createTimeStart])->andFilterWhere(['<=', 'end_date', $this->createTimeEnd]);
+            $query->andWhere(['BETWEEN', 'end_date', $date_start, $date_end]);
+        }
+       
 
         return $dataProvider;
     }
