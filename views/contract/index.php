@@ -67,6 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            'number_contract',
             [
                 'attribute'=>'employee', 
                 'value'=>'employee.reg_number',
@@ -75,7 +76,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'person', 
                 'value'=>'employee.person.name',
             ],
-            'number_contract',
+            [
+                'attribute'=>'group',
+                'value'=>'employee.groupemployee.group.name',
+            ],
+            [
+                'attribute'=>'leader',
+                'value'=>'employee.groupemployee.group.leader.name',
+            ],
             'doc_date',
             'start_date',
             

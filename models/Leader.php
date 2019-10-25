@@ -44,7 +44,7 @@ class Leader extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Leader Name',
+            'name' => 'Foreman Name',
             'email' => 'Email',
             'jabatan' => 'Jabatan',
         ];

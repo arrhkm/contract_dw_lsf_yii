@@ -18,6 +18,8 @@ class ContractSearch extends Contract
      */
     public $employee;
     public $person;
+    public $group;
+    public $leader;
     
 
     //variable time kartik range 
@@ -49,6 +51,7 @@ class ContractSearch extends Contract
                     'number_contract', 'doc_date', 'start_date', 'end_date', 'corporate_name', 
                     'corporate_address', 'jenis_usaha', 'cara_pembayaran', 'tempat_aggrement', 
                     'pejabat_acc', 'status', 'employee', 'person', 'createTimeStart', 'createTimeEnd',
+                    'group', 'leader', 
                 ],
                 'safe'
             ],
@@ -77,8 +80,12 @@ class ContractSearch extends Contract
     public function search($params, $date_start= NULL, $date_end=NULL)
     {
         $query = Contract::find();
-        $query->joinWith('employee')//('LEFT JOIN', 'employee_employee', 'employee_employee.id = contract_contract.employee_id');
-        ->join('RIGHT JOIN', 'employee_person', 'employee_person.id = employee_employee.person_id');
+        $query->joinWith('employee')
+            ->join('RIGHT JOIN', 'employee_person', 'employee_person.id = employee_employee.person_id')
+            ->join('LEFT JOIN', 'employee_groupemployee',  'employee_groupemployee.employee_id = employee_employee.id')
+            ->join('LEFT JOIN', 'employee_group', 'employee_group.id = employee_groupemployee.group_id');
+        $query->join('LEFT JOIN', 'employee_leader', 'employee_leader.id = employee_group.leader_id');
+
 
         
         // add conditions that should always apply here
@@ -121,10 +128,10 @@ class ContractSearch extends Contract
             ->andFilterWhere(['ilike', 'status', $this->status]);
         $query->andFilterWhere(['ilike', 'employee_person.name', $this->person]);
         $query->andFilterWhere(['ilike', 'employee_employee.reg_number', $this->employee]);
-        if (isset($date_start) && isset($date_end)){
-            //$this->createTimeStart = '2019-03-19';
-            //$this->createTimeEnd = '2019-03-19';
-            //$query->andFilterWhere(['>=', 'end_date', $this->createTimeStart])->andFilterWhere(['<=', 'end_date', $this->createTimeEnd]);
+        $query->andFilterWhere(['ilike', 'employee_group.name', $this->group]);
+        $query->andFilterWhere(['ilike', 'employee_leader.name', $this->leader]);
+        //$query->andFilterWhere(['employee_groupemployee.group_id'=> $this->group]);
+        if (isset($date_start) && isset($date_end)){            
             $query->andWhere(['BETWEEN', 'end_date', $date_start, $date_end]);
         }
        

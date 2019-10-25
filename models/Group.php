@@ -47,7 +47,7 @@ class Group extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Group name',
+            'name' => 'Group Foreman Name',
             'leader_id' => 'Leader ID',
         ];
     }
