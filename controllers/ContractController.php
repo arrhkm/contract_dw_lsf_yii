@@ -16,6 +16,7 @@ use yii\data\ArrayDataProvider;
 use DateInterval;
 use app\models\DateRangeForm;
 
+use yii\db\Query;
 
 /**
  * ContractController implements the CRUD actions for Contract model.
@@ -56,6 +57,8 @@ class ContractController extends Controller
                 'model_form' => $model_form,
             ]);
         }
+     
+
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -157,7 +160,7 @@ class ContractController extends Controller
                 $date_contract = $contracts[0]['end_date'];
                 $jedah = DateRange::getRangeValueFromNow($date_contract);
                 if ($jedah >=-30 && $jedah<30){
-                    if (isset ($contracts[0]['start_date'])){
+                    if (isset ($contracts[0]['end_date'])){
                         array_push($dt_contract, [
                             'employee_id'=>$emp->id,
                             'name'=>$emp->person->name, 
@@ -199,15 +202,18 @@ class ContractController extends Controller
         //------------------------------------------
                        
         
-       
-        $model = Contract::find()->joinWith('employee')
+        $model = Contract::find()->with('employee')
         ->where(['contract_contract.status' => 'notified'])
         ->orWhere(
            ['between',
                'contract_contract.end_date',
                $today_str,
                $end_date_str,
-           ]);
+           ]
+        );
+        
+        
+
         return $this->render('expiredcontract',[
             'today'=>$today,
             'interval'=>$interval,

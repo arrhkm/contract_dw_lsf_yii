@@ -40,6 +40,7 @@ class ContractSearch extends Contract
         ];
     }*/
 
+
     public function rules()
     {
         return [
@@ -58,6 +59,14 @@ class ContractSearch extends Contract
             [['besar_upah'], 'number'],
             
             
+        ];
+    }
+
+
+    public function attributeLabels()
+    {
+        return [
+            'leader' => 'Foreman',
         ];
     }
 

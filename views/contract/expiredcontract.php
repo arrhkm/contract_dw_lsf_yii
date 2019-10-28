@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 use yii\data\ActiveDataProvider;
+use app\components\EmployeeCountContract;
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -39,6 +40,13 @@ div.scroll-content {
         'contract_distance',
         'besar_upah',
         'status',
+        [
+            'label'=>'jumlah kontrak',
+            'value'=>function($model){
+                $x = new EmployeeCountContract($model->employee_id);
+                return $x->countCountract();
+            }
+        ],
         [
             'label'=>'Jatuh Tempo(Hari)',
             'value'=> function($model){

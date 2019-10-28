@@ -1,5 +1,6 @@
 <?php
 
+use app\components\EmployeeCountContract;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
@@ -82,6 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute'=>'leader',
+                'label'=>'Foreman',
                 'value'=>'employee.groupemployee.group.leader.name',
             ],
             'doc_date',
@@ -89,7 +91,14 @@ $this->params['breadcrumbs'][] = $this->title;
             
             'end_date',
             'contract_distance',
-            'besar_upah',
+            [
+                'label'=>'Jumlah kontrack', 
+                'value'=> function($model){
+                    $jml = New EmployeeCountContract($model->employee_id);
+                    return $jml->countCountract();
+                }
+            ],
+            //'besar_upah',
             'project.name',
             'contractType.contract_name',
             //'corporate_name',

@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 
+use app\components\EmployeeCountContract;
+use app\models\Employee;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EmployeeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -32,6 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'person',
                 'value'=>'person.name',
+            ],
+            [
+                'label'=>'Jumlah kontrak', 
+                'value'=>function($model){
+                    $jml = New EmployeeCountContract($model->id);
+                    return $jml->countCountract();
+                }
             ],
             [
                 'attribute'=>'group',
