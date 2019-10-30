@@ -63,16 +63,21 @@ class Group extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEmployeeGroupemployees()
+    public function getGroupemployees()
     {
-        return $this->hasMany(EmployeeGroupemployee::className(), ['group_id' => 'id']);
+        return $this->hasMany(Groupemployee::className(), ['group_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEmployeeRegisteremailgroups()
+    public function getRegisteremailgroups()
     {
-        return $this->hasMany(EmployeeRegisteremailgroup::className(), ['group_id' => 'id']);
+        return $this->hasMany(Registeremailgroup::className(), ['group_id' => 'id']);
+    }
+
+    public function getEmailgroup()
+    {
+        return $this->hasOne(Emailgroup::className(), ['id' => 'email_group_id'])->viaTable('employee_registeremailgroup',['group_id'=>'id']);
     }
 }

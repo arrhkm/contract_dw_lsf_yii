@@ -54,7 +54,7 @@ class Registeremailgroup extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEmailGroup()
+    public function getEmailgroup()
     {
         return $this->hasOne(Emailgroup::className(), ['id' => 'email_group_id']);
     }

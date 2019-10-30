@@ -18,7 +18,11 @@ use yii\helpers\ArrayHelper;
 class ProjectStatus {
     //put your code here
     public static function getListProjectStatus(){
-        $status = ['active', 'close', 'notified'];
+        $status = [
+            'active'=>'active', 
+            'close'=>'close', 
+            'notified'=>'notified'
+        ];
         return $status;
     }
     

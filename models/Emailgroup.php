@@ -51,8 +51,8 @@ class Emailgroup extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEmployeeRegisteremailgroups()
+    public function getRegisteremailgroups()
     {
-        return $this->hasMany(EmployeeRegisteremailgroup::className(), ['email_group_id' => 'id']);
+        return $this->hasMany(Registeremailgroup::className(), ['email_group_id' => 'id']);
     }
 }

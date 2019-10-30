@@ -51,8 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'group_id',
             //'employee_id',
             'group.name',
-            'emailGroup.name',
-            'emailGroup.email',
+            'emailgroup.name',
+            'emailgroup.email',
             //'employee.person.name',
             [ 
                 'class' => 'yii\grid\ActionColumn',

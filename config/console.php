@@ -26,6 +26,18 @@ $config = [
             ],
         ],
         'db' => $db,
+        'mail' => [
+            'class' => 'yii\swiftmailer\Mailer',           
+            'useFileTransport'=>false,
+            'transport'=>[
+                'class'=>'Swift_SmtpTransport', 
+                'host'=>'lintech.co.id',
+                'username'=>'hakam@lintech.co.id',
+                'password'=>'sungaimahakam071183',
+                'port'=>'465',
+                'encryption'=>'ssl',
+            ]
+        ],
     ],
     'params' => $params,
     /*

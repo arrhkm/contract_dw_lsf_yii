@@ -193,27 +193,25 @@ class ContractController extends Controller
     public function actionExpiredcontract($interval_day=30){
         $today = date_create(date('Y-m-d'));
         $today_str = date_format($today,"Y-m-d");
-        //$interval = new DateInterval("P".$days_interval."D");
-        $interval = new DateInterval('P30D');
-        
+        $interval_str = "P".$interval_day."D";
+        $interval = new DateInterval($interval_str);
         
         $end_date = $today->add($interval);
         $end_date_str = date_format($end_date,'Y-m-d');
         //------------------------------------------
                        
+        $model = Contract::find()->with('employee')        
+        ->where(            
+            [
+                'between',
+                'contract_contract.end_date',
+                $today_str,
+                $end_date_str,
+            ]
+        )
+        ->andFilterWhere(['contract_contract.status' => 'notified'])
+        ;
         
-        $model = Contract::find()->with('employee')
-        ->where(['contract_contract.status' => 'notified'])
-        ->orWhere(
-           ['between',
-               'contract_contract.end_date',
-               $today_str,
-               $end_date_str,
-           ]
-        );
-        
-        
-
         return $this->render('expiredcontract',[
             'today'=>$today,
             'interval'=>$interval,
