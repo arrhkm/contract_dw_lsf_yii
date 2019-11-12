@@ -5,12 +5,10 @@ use yii\helpers\Html;
 
 
 
-if (!isset($group_name)){
-    $user='H O D';
-}
+
 ?>
 
-<h2> <?="Hello ".$group_name." , You mast check your data list contract now!"?></h2>
+<h2> <?="Hello  ".$group_name." , You mast check your data list contract now!"?></h2>
 <table class="table-bordered" border="1">
     <thead>
         <th>reg_number</th>

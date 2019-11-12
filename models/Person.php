@@ -27,6 +27,7 @@ class Person extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    
     use \app\commands\SmartIncrementKeyDb;
     
     

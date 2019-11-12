@@ -72,6 +72,7 @@ class PersonController extends Controller
     public function actionCreate()
     {
         $model = new Person();
+        $model->id = $model->getLastId();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
