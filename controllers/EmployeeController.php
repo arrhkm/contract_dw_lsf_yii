@@ -65,12 +65,27 @@ class EmployeeController extends Controller
     public function actionCreate()
     {
         $model = new Employee();
+        $model->id = $model->getLastId();
         $model->date_of_hired = date('Y-m-d');
+        
+        //'date_of_hired' => 
+            $model->is_permanent=FALSE;
+            
+            //person_id,
+            //status,
+            //$moel->name_employee = $model->person->name;
+            //$model->idcard = $model->person->idcard;
+            $model->type ='DW';
+            $model->status_contract = 'PKWT';
+            
 
-        if ($model->load(Yii::$app->request->post())){
+        if ($model->load(Yii::$app->request->post())&& $model->validate()){
             $model->reg_number= strtoupper($model->reg_number);
+            if ($model->is_permanent){
+                $model->status_contract='PKWTT';
+            }
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }
             
         }

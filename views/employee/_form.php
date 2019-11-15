@@ -33,10 +33,23 @@ use app\commands\ListPerson;
         
     ]) ?>
 
-    <?= $form->field($model, 'is_permanent')->checkbox() ?>
+    <?= $form->field($model, 'status_contract')->widget(Select2::class,[
+        'data'=> ['PKWT'=>'PKWT', 'PKWTT'=>'PKWTT'],
+        'options'=>[
+            'prompt'=>'blank..',
+            'placeholder'=>'Select ..',
+        ]
+    ])?>
 
     <?php //= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'is_permanent')->checkBox(['label' => 'Permanent', 'selected' => $model->is_permanent])?>
 
+    <?= $form->field($model, 'status')->widget(Select2::className(),[
+        'data'=>['hired'=>'hired', 'out'=>'out']
+    ])?>
+
+    <?= $form->field($model, 'dscription_out')->textInput(['maxlength' => true]) ?>
     
 
     <div class="form-group">

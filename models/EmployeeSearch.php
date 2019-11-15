@@ -24,7 +24,7 @@ class EmployeeSearch extends Employee
         return [
             [['id', 'person_id'], 'integer'],
             [
-                ['reg_number', 'date_of_hired', 'bpjs_kes', 'bpjs_tk', 'email', 'person', 'group'],
+                ['reg_number', 'date_of_hired', 'bpjs_kes', 'bpjs_tk', 'email', 'person', 'group', 'status', 'type', 'status_contract'],
                 'safe'
             ],
             [['is_permanent'], 'boolean'],
@@ -59,6 +59,12 @@ class EmployeeSearch extends Employee
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => ['pageSize'=>5],
+            'sort' => [
+                'defaultOrder' => [
+                    'reg_number' => SORT_ASC,                    
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -75,10 +81,16 @@ class EmployeeSearch extends Employee
             'date_of_hired' => $this->date_of_hired,
             'is_permanent' => $this->is_permanent,
             'person_id' => $this->person_id,
+            
+
         ]);
+        //$query->andWhere(['<>', 'status', 'out']);
 
         $query->andFilterWhere(['ilike', 'reg_number', $this->reg_number])           
             ->andFilterWhere(['ilike', 'employee_person.name', $this->person])
+            ->andFilterWhere(['ilike', 'status', $this->status])
+            ->andFilterWhere(['ilike', 'type', $this->type])
+            ->andFilterWhere(['ilike', 'status_contract', $this->status_contract])
             ->andFilterWhere(['ilike', 'employee_person.no_bpjs_kesehatan', $this->bpjs_kes])
             ->andFilterWhere(['ilike', 'employee_person.no_bpjs_tenaga_kerja', $this->bpjs_tk])
             ->andFilterWhere(['ilike', 'employee_group.name', $this->group])

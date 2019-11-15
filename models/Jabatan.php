@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\commands\SmartIncrementKeyDb;
 use Yii;
 
 /**
@@ -17,6 +18,8 @@ class Jabatan extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    use SmartIncrementKeyDb;
+
     public static function tableName()
     {
         return 'contract_jabatan';
@@ -51,4 +54,6 @@ class Jabatan extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ContractContract::className(), ['jabatan_id' => 'id']);
     }
+
+    
 }

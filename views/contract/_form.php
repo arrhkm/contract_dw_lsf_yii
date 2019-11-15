@@ -23,6 +23,10 @@ use app\commands\ListPerson;
 
     <?= $form->field($model, 'number_contract')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'employee_id')->label('Employee')->widget(Select2::class,[
+        'data'=> ListPerson::getListPerson(),
+    ]) ?>
+
     <?= $form->field($model, 'doc_date')->widget(DatePicker::class, [
         'dateFormat'=>'php:Y-m-d',
         'inline'=>True,
@@ -66,14 +70,14 @@ use app\commands\ListPerson;
         'data'=> app\commands\ListContractType::getListContractType(),
     ]) ?>
 
-    <?= $form->field($model, 'employee_id')->label('Employee')->widget(Select2::class,[
-        'data'=> ListPerson::getListPerson(),
-    ]) ?>
+    
 
     <?= $form->field($model, 'project_id')->label('Project')->widget(Select2::class, [
         'data'=> \app\commands\ListProject::getListProject(),
         'options' => ['placeholder' => 'Select  ...'],
     ]) ?>
+
+    
 
     <?= $form->field($model, 'status')->widget(Select2::class,[
             //'maxlength' => true, 

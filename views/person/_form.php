@@ -34,7 +34,13 @@ use yii\jui\DatePicker;
 
     <?= $form->field($model, 'bank_account')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'marital')->checkbox() ?>
+    <?= $form->field($model, 'marital')->widget(kartik\select2\Select2::class,[
+        'data' => ['M'=>'Marit', 'S'=>'Single'],
+        'options' => ['placeholder' => 'Select Marital ...'],
+        /*'pluginOptions' => [
+            'allowClear' => true
+        ],*/
+    ]) ?>
 
     <?= $form->field($model, 'gender')->widget(kartik\select2\Select2::class,[
         'data' => ['M'=>'Male', 'F'=>'Female'],

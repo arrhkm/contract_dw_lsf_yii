@@ -47,7 +47,7 @@ class Person extends \yii\db\ActiveRecord
         return [
             [['name', 'marital', 'gender'], 'required'],
             [['birth_of_date'], 'safe'],
-            [['marital'], 'boolean'],
+            [['marital'], 'string', 'max'=>1],
             [['idcard'], 'string', 'max' => 35],
             [['name', 'birth_city', 'address', 'city', 'district'], 'string', 'max' => 100],
             [['phone', 'bank_account', 'tax_account'], 'string', 'max' => 20],

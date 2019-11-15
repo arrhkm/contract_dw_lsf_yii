@@ -86,21 +86,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Foreman',
                 'value'=>'employee.groupemployee.group.leader.name',
             ],
-            'doc_date',
-            'start_date',
-            
+            //'doc_date',
+            'start_date',            
             'end_date',
             'contract_distance',
             [
-                'label'=>'Jumlah kontrack', 
+                'label'=>'n contract', 
                 'value'=> function($model){
                     $jml = New EmployeeCountContract($model->employee_id);
                     return $jml->countCountract();
                 }
             ],
             //'besar_upah',
-            'project.name',
-            'contractType.contract_name',
+            //'project.name',
+            
+            [
+                'attribute'=>'contract_type',
+                'value'=> 'contractType.contract_name',
+            ],
             //'corporate_name',
             //'corporate_address',
             //'jenis_usaha',

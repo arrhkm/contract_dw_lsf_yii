@@ -20,6 +20,7 @@ class ContractSearch extends Contract
     public $person;
     public $group;
     public $leader;
+    public $contract_type;
     
 
     //variable time kartik range 
@@ -52,7 +53,7 @@ class ContractSearch extends Contract
                     'number_contract', 'doc_date', 'start_date', 'end_date', 'corporate_name', 
                     'corporate_address', 'jenis_usaha', 'cara_pembayaran', 'tempat_aggrement', 
                     'pejabat_acc', 'status', 'employee', 'person', 'createTimeStart', 'createTimeEnd',
-                    'group', 'leader', 
+                    'group', 'leader', 'contract_type',
                 ],
                 'safe'
             ],
@@ -89,11 +90,12 @@ class ContractSearch extends Contract
     public function search($params, $date_start= NULL, $date_end=NULL)
     {
         $query = Contract::find();
-        $query->joinWith('employee')
-            ->join('RIGHT JOIN', 'employee_person', 'employee_person.id = employee_employee.person_id')
+        $query->join('LEFT JOIN', 'employee_employee', 'employee_employee.id=contract_contract.employee_id')
+            ->join('LEFT JOIN', 'employee_person', 'employee_person.id = employee_employee.person_id')
             ->join('LEFT JOIN', 'employee_groupemployee',  'employee_groupemployee.employee_id = employee_employee.id')
             ->join('LEFT JOIN', 'employee_group', 'employee_group.id = employee_groupemployee.group_id');
         $query->join('LEFT JOIN', 'employee_leader', 'employee_leader.id = employee_group.leader_id');
+        $query->join('LEFT JOIN', 'contract_contracttype', 'contract_contracttype.id = contract_contract.contract_type_id');
 
 
         
@@ -133,8 +135,9 @@ class ContractSearch extends Contract
             ->andFilterWhere(['ilike', 'jenis_usaha', $this->jenis_usaha])
             ->andFilterWhere(['ilike', 'cara_pembayaran', $this->cara_pembayaran])
             ->andFilterWhere(['ilike', 'tempat_aggrement', $this->tempat_aggrement])
-            ->andFilterWhere(['ilike', 'pejabat_acc', $this->pejabat_acc])           
-            ->andFilterWhere(['ilike', 'status', $this->status]);
+            ->andFilterWhere(['ilike', 'pejabat_acc', $this->pejabat_acc]) 
+            ->andFilterWhere(['ilike', 'contract_contracttype.contract_name', $this->contract_type])              
+            ->andFilterWhere(['ilike', 'contract_contract.status', $this->status]);
         $query->andFilterWhere(['ilike', 'employee_person.name', $this->person]);
         $query->andFilterWhere(['ilike', 'employee_employee.reg_number', $this->employee]);
         $query->andFilterWhere(['ilike', 'employee_group.name', $this->group]);

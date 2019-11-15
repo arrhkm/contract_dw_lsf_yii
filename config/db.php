@@ -2,8 +2,8 @@
 
 return [
     'class' => 'yii\db\Connection',
-    //'dsn' => 'pgsql:host=localhost;dbname=kontrak_dw',
-    'dsn' => 'pgsql:host=localhost;dbname=contract_dw',
+    
+    'dsn' => 'pgsql:host=localhost;dbname=contract_dw_ldp',
     'username' => 'superhakam',
     'password' => 'superhakam',
     'charset' => 'utf8',

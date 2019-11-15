@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'APLIKASI KONTRAK KARYAWAN LSF', //Yii::$app->name,
+        'brandLabel' => 'APLIKASI KONTRAK KARYAWAN LDP', //Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

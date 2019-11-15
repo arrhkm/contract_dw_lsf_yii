@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             'address',
             'bank_account',
-            'marital:boolean',
+            'marital:text',
             'gender',
             'tax_account',
             'city',

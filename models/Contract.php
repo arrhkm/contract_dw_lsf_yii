@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\commands\SmartIncrementKeyDb;
 use Yii;
 
 /**
@@ -36,6 +37,8 @@ class Contract extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    use SmartIncrementKeyDb;
+    
     public static function tableName()
     {
         return 'contract_contract';
@@ -49,12 +52,14 @@ class Contract extends \yii\db\ActiveRecord
         return [
             [['number_contract', 'contract_distance', 'contract_type_id', 'employee_id', 'status'], 'required'],
             [['doc_date', 'start_date', 'end_date'], 'safe'],
-            [['contract_distance', 'jabatan_id', 'contract_type_id', 'employee_id', 'project_id'], 'default', 'value' => null],
-            [['contract_distance', 'jabatan_id', 'contract_type_id', 'employee_id', 'project_id'], 'integer'],
+            [['contract_distance', 'jabatan_id', 'contract_type_id', 'employee_id', 'project_id', 'id_department'], 'default', 'value' => null],
+            [['contract_distance', 'jabatan_id', 'contract_type_id', 'employee_id', 'project_id', 'id_department'], 'integer'],
             [['besar_upah'], 'number'],
             [['number_contract', 'corporate_name', 'corporate_address', 'tempat_aggrement', 'pejabat_acc'], 'string', 'max' => 100],
             [['jenis_usaha', 'cara_pembayaran', 'status'], 'string', 'max' => 50],
+            //[['status_contract'], 'string', 'max' => 10],
             [['contract_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contracttype::className(), 'targetAttribute' => ['contract_type_id' => 'id']],
+            [['id_department'], 'exist', 'skipOnError' => true, 'targetClass' => Department::className(), 'targetAttribute' => ['id_department' => 'id']],
             [['jabatan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Jabatan::className(), 'targetAttribute' => ['jabatan_id' => 'id']],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'id']],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
@@ -72,7 +77,7 @@ class Contract extends \yii\db\ActiveRecord
             'doc_date' => 'Doc Date',
             'start_date' => 'Start Date',
             'end_date' => 'End Date',
-            'contract_distance' => 'Contract Distance',
+            'contract_distance' => 'durasi',
             'besar_upah' => 'Besar Upah',
             'corporate_name' => 'Corporate Name',
             'corporate_address' => 'Corporate Address',
@@ -85,6 +90,8 @@ class Contract extends \yii\db\ActiveRecord
             'employee_id' => 'Employee ID',
             'project_id' => 'Project ID',
             'status' => 'Status',
+            'id_department' => 'Id Department',
+            //'status_contract'=>'Status Cotract',
         ];
     }
 
@@ -103,6 +110,16 @@ class Contract extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Jabatan::className(), ['id' => 'jabatan_id']);
     }
+
+    
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDepartment()
+    {
+        return $this->hasOne(Department::className(), ['id' => 'id_department']);
+    }
+
 
     /**
      * @return \yii\db\ActiveQuery

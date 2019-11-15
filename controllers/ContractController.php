@@ -88,9 +88,26 @@ class ContractController extends Controller
     public function actionCreate()
     {
         $model = new Contract();
+        $model->id = $model->getLastId();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            if (isset($model->employee_id)){
+                $employee = Employee::findOne(['id'=>$model->employee_id]);
+                if ($model->status=='PKWTT'){                    
+                    $employee->is_permanent = TRUE;
+                    $employee->status_contract='PKWTT';
+                    $employee->update();
+                }else {
+                    $employee->is_permanent = FALSE;
+                    $employee->status_contract='PKWT';
+                    $employee->update();
+                }
+                
+            }
+            if ($model->save()){    
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            
         }
 
         return $this->render('create', [
@@ -109,8 +126,25 @@ class ContractController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            if (isset($model->employee_id)){
+                $employee = Employee::findOne(['id'=>$model->employee_id]);
+                if ($model->status=='PKWTT'){                    
+                    $employee->is_permanent = TRUE;
+                    $employee->status_contract='PKWTT';
+                    $employee->update();
+                }else {
+                    $employee->is_permanent = FALSE;
+                    $employee->status_contract='PKWT';
+                    $employee->update();
+                }
+                
+            }
+            if ($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+            
         }
 
         return $this->render('update', [

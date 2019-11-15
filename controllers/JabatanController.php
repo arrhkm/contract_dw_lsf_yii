@@ -65,9 +65,11 @@ class JabatanController extends Controller
     public function actionCreate()
     {
         $model = new Jabatan();
+        $model->id = $model->getLastId();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            //return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [

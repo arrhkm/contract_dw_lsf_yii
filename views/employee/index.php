@@ -1,10 +1,13 @@
 <?php
 
+use app\components\ContractEmp;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
 use app\components\EmployeeCountContract;
 use app\models\Employee;
+
+//use app\components\ContractEmp;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EmployeeSearch */
@@ -28,38 +31,57 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
+            'id',
             'reg_number',
             [
                 'attribute'=>'person',
                 'value'=>'person.name',
             ],
             [
-                'label'=>'Jumlah kontrak', 
+                'label'=>'n contract', 
                 'value'=>function($model){
                     $jml = New EmployeeCountContract($model->id);
                     return $jml->countCountract();
                 }
             ],
-            [
+            /*[
                 'attribute'=>'group',
                 'value'=>'groupemployee.group.name',
-            ],
+            ],*/
             
             'date_of_hired',
-            [
+            /*[
                 'attribute'=>'bpjs_kes',
                 'value'=>'person.no_bpjs_kesehatan',
             ],
             [
                 'attribute'=>'bpjs_tk',
                 'value'=>'person.no_bpjs_tenaga_kerja',
-            ],
-            //'is_permanent:boolean',
+            ],*/
+            'is_permanent:boolean',
             //'email:email',
             //'person_id',
+            'status', 
+            'status_contract',
+            'type',
+            [
+                'label'=>'Contract Terahir',
+                'value'=>function($model){
+                    $contract = New ContractEmp();
+                    $contract_ini = $contract->getContractActive($model->id);
+                    return $contract_ini->number_contract;
+                }
+            ],
+            [
+                'label'=>'Tgl Contract',
+                'value'=>function($model){
+                    $contract = New ContractEmp();
+                    $contract_ini = $contract->getContractActive($model->id);
+                    return $contract_ini->start_date;
+                }
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -77,6 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
                 
             ],
+            
         ],
     ]); ?>
 
