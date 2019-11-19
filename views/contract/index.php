@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $form->field($model_form, 'date_time_end')->widget(DatePicker::class,[
         'dateFormat'=>'php:Y-m-d',
     ])?>
-    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>   
+    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'id'=>'btn_search2']) ?>   
     <?php ActiveForm::end();?>
     
     <?= GridView::widget([
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'number_contract',
             [
                 'attribute'=>'employee', 
@@ -90,13 +90,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'start_date',            
             'end_date',
             'contract_distance',
-            [
+            /*[
                 'label'=>'n contract', 
                 'value'=> function($model){
                     $jml = New EmployeeCountContract($model->employee_id);
                     return $jml->countCountract();
                 }
-            ],
+            ],*/
+            'contract_progress_status', 
+            'contract_progress_num',
             //'besar_upah',
             //'project.name',
             
@@ -124,3 +126,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
+<?
+$this->registerJs(<<<JS
+
+    var x = document.getElementById("daterangeform-date_time_start").value;   
+    if(x) {
+        document.getElementById('btn_search2').enabled = TRUE;
+        //alert("Ada isi nya");
+    } else 
+     //alert(" tidak ada isi nya");
+    document.getElementById('btn_search2').disabled = TRUE;
+    
+  
+JS
+);

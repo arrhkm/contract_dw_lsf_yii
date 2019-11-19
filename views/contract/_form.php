@@ -43,13 +43,13 @@ use app\commands\ListPerson;
 
     <?= $form->field($model, 'contract_distance')->textInput() ?>
 
-    <?= $form->field($model, 'besar_upah')->textInput() ?>
+    <?= $form->field($model, 'contract_progress_status')->widget(Select2::className(), [
+        'data'=>['contract'=>'contract', 'extends'=>'extends'],
+        'options' => ['placeholder' => 'Select Status Progress ...'],
+        'pluginOptions' => ['allowClear' => true],
+    ]) ?>
 
-    <?= $form->field($model, 'corporate_name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'corporate_address')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'jenis_usaha')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'contract_progress_num')->textInput() ?>
 
     <?= $form->field($model, 'jabatan_id')->widget(Select2::class, [
         'data'=> \app\commands\JabatanList::getListJabatan(),
@@ -59,12 +59,6 @@ use app\commands\ListPerson;
             
         ]
     ]) ?>
-
-    <?= $form->field($model, 'cara_pembayaran')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'tempat_aggrement')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'pejabat_acc')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'contract_type_id')->widget(Select2::class, [
         'data'=> app\commands\ListContractType::getListContractType(),
@@ -84,6 +78,25 @@ use app\commands\ListPerson;
             'readonly'=>TRUE,
             'data'=> \app\commands\ProjectStatus::getListProjectStatus(),
         ]) ?>
+
+    
+
+    <?= $form->field($model, 'besar_upah')->textInput() ?>
+
+    <?= $form->field($model, 'corporate_name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'corporate_address')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'jenis_usaha')->textInput(['maxlength' => true]) ?>
+
+   
+    <?= $form->field($model, 'cara_pembayaran')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'tempat_aggrement')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'pejabat_acc')->textInput(['maxlength' => true]) ?>
+
+   
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

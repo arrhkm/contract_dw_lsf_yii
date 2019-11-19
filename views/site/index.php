@@ -6,8 +6,9 @@ $this->title = 'CONTRACT DAILYWORKER';
 ?>
 <style>
 img {
-    width: 250;
+    /*width: 250;
     height: auto;
+    */
 }    
 </style>
 <div class="site-index">
@@ -18,12 +19,13 @@ img {
 
         
     </div class>
+    <div class="col-lg-4"></div>
     <div class="col-lg-4">
-    </div>
-    <div class="col-lg-4">
-        ​<picture>    
-        <img src="img/builders-toon.jpg" class="img-fluid img-thumbnail" alt="">
-        </picture>
+       
+            ​<picture>    
+            <img src="img/builders-toon.jpg" class="img-fluid img-thumbnail" alt="", width="400", height="400">
+            </picture>
+       
     </div>
     <div class="col-lg-4">
     </div>

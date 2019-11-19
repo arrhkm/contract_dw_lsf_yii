@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use app\models\Employee;
 use app\commands\DateRange;
+use app\components\ContractProgress;
 use yii\data\ArrayDataProvider;
 use DateInterval;
 use app\models\DateRangeForm;
@@ -257,6 +258,22 @@ class ContractController extends Controller
         
     }
     //end
+
+    public function actionUrutkan(){
+        $model = Employee::find()->all();
+        foreach ($model as $models){
+            $urut = New ContractProgress($models->id);
+            $urut->urutkan();
+        }
+
+        
+
+        $provider = New ArrayDataProvider([
+            'allModels'=> $model,
+        ]);
+        
+        return $this->render('urutkan', ['provider'=>$provider]);
+    }
 
     /**
      * Finds the Contract model based on its primary key value.

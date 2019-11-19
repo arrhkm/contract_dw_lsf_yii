@@ -25,9 +25,17 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         //'template/BizPage/js/main.js',
+        'js/dattables/dataTables.buttons.min.js',
+        'js/dattables/jquery.dataTables.min.js',
+        'js/dattables/',
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'fedemotta\datatables\DataTablesAsset',
+        'fedemotta\datatables\DataTablesBootstrapAsset',
+        'fedemotta\datatables\DataTablesTableToolsAsset',
     ];
+
+   
 }

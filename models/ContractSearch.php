@@ -127,6 +127,8 @@ class ContractSearch extends Contract
             'contract_type_id' => $this->contract_type_id,
             'employee_id' => $this->employee_id,
             'project_id' => $this->project_id,
+            'contract_contract.status' => $this->status,
+            'contract_contracttype.contract_name'=> $this->contract_type,
         ]);
 
         $query->andFilterWhere(['ilike', 'number_contract', $this->number_contract])
@@ -135,9 +137,9 @@ class ContractSearch extends Contract
             ->andFilterWhere(['ilike', 'jenis_usaha', $this->jenis_usaha])
             ->andFilterWhere(['ilike', 'cara_pembayaran', $this->cara_pembayaran])
             ->andFilterWhere(['ilike', 'tempat_aggrement', $this->tempat_aggrement])
-            ->andFilterWhere(['ilike', 'pejabat_acc', $this->pejabat_acc]) 
-            ->andFilterWhere(['ilike', 'contract_contracttype.contract_name', $this->contract_type])              
-            ->andFilterWhere(['ilike', 'contract_contract.status', $this->status]);
+            ->andFilterWhere(['ilike', 'pejabat_acc', $this->pejabat_acc]);
+            //->andFilterWhere(['ilike', 'contract_contracttype.contract_name', $this->contract_type]);           
+            //->andFilterWhere(['ilike', 'contract_contract.status', $this->status]);
         $query->andFilterWhere(['ilike', 'employee_person.name', $this->person]);
         $query->andFilterWhere(['ilike', 'employee_employee.reg_number', $this->employee]);
         $query->andFilterWhere(['ilike', 'employee_group.name', $this->group]);
@@ -147,6 +149,7 @@ class ContractSearch extends Contract
             $query->andWhere(['BETWEEN', 'end_date', $date_start, $date_end]);
         }
        
+        $query->orderBy('start_date DESC');
 
         return $dataProvider;
     }

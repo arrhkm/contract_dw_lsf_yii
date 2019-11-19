@@ -31,8 +31,10 @@ AppAsset::register($this);
     NavBar::begin([
         'brandLabel' => 'APLIKASI KONTRAK KARYAWAN LDP', //Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
+        'innerContainerOptions' => ['class' => 'container-fluid'],
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            //'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-inverse',
         ],
     ]);
     echo Nav::widget([
@@ -56,6 +58,7 @@ AppAsset::register($this);
                ['label' => 'Contract Employee', 'url' => ['/contract']],
                //['label' => 'Contract Cek', 'url' => ['/contract/contractcek']],
                ['label' => 'SP', 'url' => ['/sp']],
+               ['label'=>'Urutkan Contract', 'url' => ['/contract/urutkan']],
                
             ]],
             //['label' => 'About', 'url' => ['/site/about']],
@@ -77,7 +80,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container">
+    <div class="container-fluid">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>

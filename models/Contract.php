@@ -53,11 +53,11 @@ class Contract extends \yii\db\ActiveRecord
             [['number_contract', 'contract_distance', 'contract_type_id', 'employee_id', 'status'], 'required'],
             [['doc_date', 'start_date', 'end_date'], 'safe'],
             [['contract_distance', 'jabatan_id', 'contract_type_id', 'employee_id', 'project_id', 'id_department'], 'default', 'value' => null],
-            [['contract_distance', 'jabatan_id', 'contract_type_id', 'employee_id', 'project_id', 'id_department'], 'integer'],
+            [['contract_distance', 'jabatan_id', 'contract_type_id', 'employee_id', 'project_id', 'id_department', 'contract_progress_num'], 'integer'],
             [['besar_upah'], 'number'],
             [['number_contract', 'corporate_name', 'corporate_address', 'tempat_aggrement', 'pejabat_acc'], 'string', 'max' => 100],
             [['jenis_usaha', 'cara_pembayaran', 'status'], 'string', 'max' => 50],
-            //[['status_contract'], 'string', 'max' => 10],
+            [['contract_progress_status'], 'string', 'max' => 20],
             [['contract_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contracttype::className(), 'targetAttribute' => ['contract_type_id' => 'id']],
             [['id_department'], 'exist', 'skipOnError' => true, 'targetClass' => Department::className(), 'targetAttribute' => ['id_department' => 'id']],
             [['jabatan_id'], 'exist', 'skipOnError' => true, 'targetClass' => Jabatan::className(), 'targetAttribute' => ['jabatan_id' => 'id']],
@@ -91,7 +91,8 @@ class Contract extends \yii\db\ActiveRecord
             'project_id' => 'Project ID',
             'status' => 'Status',
             'id_department' => 'Id Department',
-            //'status_contract'=>'Status Cotract',
+            'contract_progress_num'=> 'Progres Ke-',
+            'contract_progress_status'=> 'Status Progress',
         ];
     }
 
