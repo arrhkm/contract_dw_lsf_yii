@@ -10,7 +10,15 @@ use app\components\EmployeeCountContract;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+?>
+<h1><?= Html::encode($this->title) ?></h1>
 
+<p>
+    <?php //= Html::a('Create Contract', ['create'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Sent To Email Contract', ['sentmailcontract'], ['class' => 'btn btn-success']) ?>
+</p>
+
+<?php 
 //echo "Today :".$today." /n";
 print_r("Today_str :".$today_str."<br>");
 //echo "end_date :".$end_date." /n";
