@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php /* = GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -102,8 +102,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             
         ],
-    ]);*/ ?>
-    <?= DataTables::widget([
+    ]);?>
+    <?/*= DataTables::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         //'id'=>'myTable',
@@ -131,7 +131,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $jml->countCountract();
                 }
             ],
-            'date_of_hired',
+            //'date_of_hired',
             'is_permanent',
             'status', 
             'status_contract',
@@ -174,7 +174,7 @@ $this->params['breadcrumbs'][] = $this->title;
             
         ],
         
-    ]);?>
+    ]);*/?>
 
 
 </div>

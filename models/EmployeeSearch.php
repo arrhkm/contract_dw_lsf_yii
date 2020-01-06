@@ -81,9 +81,16 @@ class EmployeeSearch extends Employee
             'date_of_hired' => $this->date_of_hired,
             'is_permanent' => $this->is_permanent,
             'person_id' => $this->person_id,
-            
+            //'status'=>'hired',
 
         ]);
+
+         if (empty($this->status)){
+            $query->andFilterWhere([
+                'status'=>'hired',
+            ]);
+        }
+        
         //$query->andWhere(['<>', 'status', 'out']);
 
         $query->andFilterWhere(['ilike', 'reg_number', $this->reg_number])           
@@ -97,5 +104,5 @@ class EmployeeSearch extends Employee
             ->andFilterWhere(['ilike', 'email', $this->email]);
 
         return $dataProvider;
-    }
+    }    
 }
