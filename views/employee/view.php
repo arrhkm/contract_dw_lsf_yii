@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Employee */
@@ -30,13 +31,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'reg_number',
-           
-            'date_of_hired',
+            'reg_number',           
+            //'date_of_hired',
             'is_permanent:boolean',
             'email:email',
             'person_id',
         ],
     ]) ?>
+
+    <?=GridView::widget([
+        'dataProvider' => $HkmDataProvider,
+        //'filterModel' => $searchModel,
+        'columns' => [
+            'id',
+            'start_date',
+            'end_date',
+            'contract_distance', 
+            'contract_type_id', 
+            'contractType.contract_name',
+            'status', 
+            'contract_progress_num'
+        ],
+    ])?>
+
 
 </div>

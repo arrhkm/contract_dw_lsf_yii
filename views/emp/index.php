@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'reg_number',
-            'date_of_hired',
+            //'date_of_hired',
             'is_permanent:boolean',
             'email:email',
             //'person_id',

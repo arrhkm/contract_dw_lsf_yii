@@ -59,7 +59,7 @@ class EmployeeSearch extends Employee
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => ['pageSize'=>5],
+            'pagination' => ['pageSize'=>30],
             'sort' => [
                 'defaultOrder' => [
                     'reg_number' => SORT_ASC,                    

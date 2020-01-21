@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //    'value'=>'groupemployee.group.name',
             //],
             
-            'date_of_hired',
+            //'date_of_hired',
             //[
             //    'attribute'=>'bpjs_kes',
             //    'value'=>'person.no_bpjs_kesehatan',
@@ -102,7 +102,8 @@ $this->params['breadcrumbs'][] = $this->title;
             
         ],
     ]);?>
-    <??>
+
+   
 
 
 </div>

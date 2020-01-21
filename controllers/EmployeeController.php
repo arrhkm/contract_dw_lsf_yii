@@ -2,9 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Contract;
 use Yii;
 use app\models\Employee;
 use app\models\EmployeeSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,9 +54,22 @@ class EmployeeController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+        $model = $this->findModel($id);
+        $contract = Contract::find()
+        ->joinWith('contractType')
+        ->where(['employee_id'=>$id]);
+        $HkmDataProvider = New ActiveDataProvider([
+            'query' => $contract,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            
         ]);
+        return $this->render('view', [
+            'model'=>$model,
+            'HkmDataProvider'=>$HkmDataProvider,
+        ]);
+
     }
 
     /**
